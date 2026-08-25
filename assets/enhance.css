@@ -1,0 +1,130 @@
+/* YAS Heating — hand-written additions layered on top of the compiled
+   design-system stylesheet. Uses the same CSS custom properties so the
+   palette stays identical. */
+
+header.is-scrolled {
+  box-shadow: 0 1px 0 0 var(--border), 0 12px 24px -18px rgb(0 0 0 / 0.35);
+}
+
+/* ---------------- Mobile navigation drawer ---------------- */
+#mobile-nav.mobile-nav {
+  position: absolute;
+  inset-inline: 0;
+  top: 100%;
+  display: grid;
+  grid-template-rows: 0fr;
+  overflow: hidden;
+  background: var(--background);
+  border-bottom: 1px solid var(--border);
+  transition: grid-template-rows 0.28s ease;
+}
+#mobile-nav.mobile-nav.is-open {
+  grid-template-rows: 1fr;
+}
+#mobile-nav.mobile-nav > * {
+  min-height: 0;
+}
+.mobile-nav__links {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1.25rem;
+}
+.mobile-nav__links a {
+  padding: 0.9rem 0.25rem;
+  border-bottom: 1px solid var(--border);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  color: var(--foreground);
+}
+.mobile-nav__links a[aria-current="page"] {
+  color: var(--primary);
+}
+.mobile-nav__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 1.25rem 1.5rem;
+}
+.mobile-nav__actions a {
+  text-decoration: none;
+}
+
+body.nav-open {
+  overflow: hidden;
+}
+
+@media (min-width: 1024px) {
+  #mobile-nav.mobile-nav {
+    display: none;
+  }
+}
+
+/* ---------------- Contact form status message ---------------- */
+.form-status {
+  min-height: 1.25rem;
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--muted-foreground);
+  grid-column: 1 / -1;
+}
+.form-status.is-error {
+  color: #b3453a;
+}
+
+/* ---------------- Broken-image graceful fallback ---------------- */
+img.img-broken {
+  visibility: hidden;
+  position: relative;
+}
+img.img-broken::after {
+  visibility: visible;
+}
+
+/* ---------------- Equipment spec badge (replaces a missing photo) ---------------- */
+.spec-badge {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.35rem;
+  background: var(--surface-warm);
+  border: 1px solid var(--border);
+  padding: 1.75rem;
+  height: 100%;
+  min-height: 220px;
+}
+.spec-badge__eyebrow {
+  font-family: var(--font-mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--primary);
+}
+.spec-badge__list {
+  margin-top: 0.5rem;
+  display: grid;
+  gap: 0.6rem;
+}
+.spec-badge__list li {
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: var(--foreground);
+  padding-inline-start: 1rem;
+  position: relative;
+}
+.spec-badge__list li::before {
+  content: "";
+  position: absolute;
+  inset-inline-start: 0;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  background: var(--primary);
+}
+
+/* ---------------- Small print / accessibility polish ---------------- */
+::selection {
+  background: var(--primary);
+  color: var(--surface-dark);
+}
