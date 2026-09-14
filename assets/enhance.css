@@ -21,8 +21,12 @@ header.is-scrolled {
 #mobile-nav.mobile-nav.is-open {
   grid-template-rows: 1fr;
 }
-#mobile-nav.mobile-nav > * {
+/* The grid-rows collapse trick only works cleanly when the collapsing
+   grid item is a single element, so both the links and the actions
+   row are grouped into one inner wrapper that actually shrinks to 0. */
+.mobile-nav__inner {
   min-height: 0;
+  overflow: hidden;
 }
 .mobile-nav__links {
   display: flex;

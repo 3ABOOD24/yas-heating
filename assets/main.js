@@ -26,6 +26,12 @@
     panel.className = "mobile-nav";
     panel.setAttribute("aria-hidden", "true");
 
+    // Everything lives inside one wrapper so the whole panel (links +
+    // actions) collapses to zero height together when closed, instead
+    // of only the first child shrinking.
+    var inner = doc.createElement("div");
+    inner.className = "mobile-nav__inner";
+
     var nav = doc.createElement("nav");
     nav.className = "mobile-nav__links";
     nav.setAttribute("aria-label", "Mobile navigation");
@@ -37,14 +43,15 @@
       if (links[i].hasAttribute("aria-current")) a.setAttribute("aria-current", "page");
       nav.appendChild(a);
     }
-    panel.appendChild(nav);
+    inner.appendChild(nav);
 
     var actions = doc.createElement("div");
     actions.className = "mobile-nav__actions";
     if (langLink) actions.appendChild(langLink.cloneNode(true));
     if (ctaLink) actions.appendChild(ctaLink.cloneNode(true));
-    panel.appendChild(actions);
+    inner.appendChild(actions);
 
+    panel.appendChild(inner);
     header.appendChild(panel);
 
     function closeMenu() {
